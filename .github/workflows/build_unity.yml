@@ -15,10 +15,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        projectPath:
-          - ./
         unityVersion:
-          - 2019.3.0f6
+          - 2019.3.0f1
         targetPlatform:
           - StandaloneWindows64
           - StandaloneLinux64
