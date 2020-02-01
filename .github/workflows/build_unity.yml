@@ -42,7 +42,8 @@ jobs:
 
       - name: attach build hash to webgl artifact
         run: |
-          ls -al build/
+          if [[ ! -d "build/WebGL"]]; then exit 0; fi
+          ls -al build/WebGL/
           commithash=$(git rev-parse --short ${GITHUB_SHA})
           sed -i -e "s/re_pair/re_pair-$commithash/g" build/WebGL/index.html
 

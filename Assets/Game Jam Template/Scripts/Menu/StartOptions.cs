@@ -50,10 +50,10 @@ public class StartOptions : MonoBehaviour {
 		}
 
 		//If changeScenes is true, start fading and change scenes halfway through animation when screen is blocked by FadeImage
-		if (menuSettingsData.nextSceneIndex != 0) 
+		if (changeScenes || menuSettingsData.nextSceneIndex != 0) 
 		{
 			//Use invoke to delay calling of LoadDelayed by half the length of fadeColorAnimationClip
-			Invoke ("LoadDelayed", menuSettingsData.menuFadeTime);
+			Invoke("LoadDelayed", menuSettingsData.menuFadeTime);
 
             StartCoroutine(FadeCanvasGroupAlpha(0f, 1f, fadeOutImageCanvasGroup));
 
@@ -98,7 +98,7 @@ public class StartOptions : MonoBehaviour {
 		showPanels.HideMenu ();
 
 		//Load the selected scene, by scene index number in build settings
-		SceneManager.LoadScene (sceneToStart);
+		SceneManager.LoadScene(sceneToStart);
 	}
 
 	public void HideDelayed()
@@ -137,7 +137,7 @@ public class StartOptions : MonoBehaviour {
         }
 
         HideDelayed();
-        Debug.Log("Coroutine done. Game started in same scene! Put your game starting stuff here.");
+        Debug.Log("Fade from Menu coroutine done! Put your game starting stuff here.");
     }
 
 
