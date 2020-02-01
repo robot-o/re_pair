@@ -44,7 +44,9 @@ jobs:
         run: |
           ls -al build/WebGL/WebGL
           commithash=$(git rev-parse --short ${GITHUB_SHA})
+          chmod +w build/WebGL/WebGL/index.html
           sed -i -e "s/re_pair/re_pair-$commithash/g" build/WebGL/WebGL/index.html
+          chmod -w build/WebGL/WebGL/index.html
 
       - uses: actions/upload-artifact@v1
         with:
