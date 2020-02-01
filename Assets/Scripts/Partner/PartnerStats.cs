@@ -54,6 +54,7 @@ public class PartnerStats : ScriptableObject
 
     [Header("conflict potential, the difference between own HAVE and partner's WANT")]
     public List<PartnerStatEntry> conflict;
+    public float conflictPercentage = 0f;
 
     private void OnEnable()
     {

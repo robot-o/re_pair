@@ -1,23 +1,40 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+[CreateAssetMenu(menuName = "REPAIR/Relationship", order = 2)]
 [System.Serializable]
 public class Relationship : ScriptableObject
 {
+    public bool generatePartnerA = false;
+    public bool generatePartnerB = false;
+
+    public PartnerStatsSettings partnerSettingsA;
+    public PartnerStatsSettings partnerSettingsB;
+
     public Partner partnerA;
     public Partner partnerB;
-    public int patience;
 
-    public bool supposedToBe;
+    public float destinyTresholdPercentage = 0.8f;
+    public bool destiny;
 
+
+    [Header("Conflict Percentages (DISPLAY ONLY)")]
+    public float conflictPercentageDisplayA;
+    public float conflictPercentageDisplayB;
 
     [Header("Conflict of Partner A (DISPLAY ONLY)")]
-    public List<PartnerStatEntry> conflictADisplay;
+    public List<PartnerStatEntry> conflictDisplayA;
 
     [Header("Conflict of Partner B (DISPLAY ONLY)")]
-    public List<PartnerStatEntry> conflictBDisplay;
+    public List<PartnerStatEntry> conflictDisplayB;
 
-
+    public void Initialize()
+    {
+        if (partnerA == null)
+        {
+            // partnerA = GameObject.Instantiate(new Gam)
+        }
+    }
     public void calculateConflict()
     {
         calculateConflict(ref partnerA, ref partnerB);
@@ -36,8 +53,19 @@ public class Relationship : ScriptableObject
             _partnerA.stats.conflict[i].val = getRangeDelta(haveA.val, wantsB.val);
             _partnerB.stats.conflict[i].val = getRangeDelta(haveB.val, wantsA.val);
         }
-        conflictADisplay = _partnerA.stats.conflict;
-        conflictBDisplay = _partnerB.stats.conflict;
+
+        _partnerA.stats.conflictPercentage = calculateConflictPercentage(ref _partnerA); _partnerB.stats.conflictPercentage = calculateConflictPercentage(ref _partnerB);
+
+        UpdateConflictDisplay();
+    }
+
+    public void UpdateConflictDisplay()
+    {
+        conflictPercentageDisplayA = partnerA.stats.conflictPercentage;
+        conflictPercentageDisplayB = partnerB.stats.conflictPercentage;
+
+        conflictDisplayA = partnerA.stats.conflict;
+        conflictDisplayB = partnerB.stats.conflict;
     }
 
     private float getRangeDelta(float input, Util.FloatRange range)
@@ -54,6 +82,31 @@ public class Relationship : ScriptableObject
         {
             return input - range.max;
         }
+    }
+
+    public void calculateDestiny()
+    {
+        calculateConflict();
+        float destinyValA = calculateConflictPercentage(ref partnerA);
+        float destinyValB = calculateConflictPercentage(ref partnerB);
+        destiny = (destinyValA < destinyTresholdPercentage) && (destinyValB < destinyTresholdPercentage);
+    }
+
+    public float calculateConflictPercentage(ref Partner partner)
+    {
+        List<PartnerStatEntry> conflict = partner.stats.conflict;
+
+        int max = conflict.Count;
+        float cur = 0;
+
+        for (int i = 0; i < max; i++)
+        {
+            if (conflict[i].val != 0)
+            {
+                cur++;
+            }
+        }
+        return cur / max;
     }
 
 }

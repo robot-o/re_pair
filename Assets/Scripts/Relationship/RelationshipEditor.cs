@@ -13,6 +13,10 @@ public class RelationshipEditor : Editor
         {
             myScript.calculateConflict();
         }
+        if (GUILayout.Button("CALCULATE DESTINY"))
+        {
+            myScript.calculateDestiny();
+        }
 
         DrawDefaultInspector();
     }
