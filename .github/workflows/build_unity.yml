@@ -70,7 +70,7 @@ jobs:
       - name: copy webgl build over to deployment path
         run: |
           ls -alh artifact/
-          /bin/cp -rf artifact/* deploy
+          /bin/cp -rf artifact/WebGL/* deploy
           cd deploy
           git config --local user.email "action@github.com"
           git config --local user.name "${GITHUB_ACTOR}"
