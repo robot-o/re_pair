@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-[CreateAssetMenu(menuName = "PartnerStats")]
+[CreateAssetMenu(menuName = "REPAIR/Partner/Stats")]
 [System.Serializable]
 public class PartnerStats : ScriptableObject
 {

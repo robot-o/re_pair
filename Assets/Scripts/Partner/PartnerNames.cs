@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "PartnerNames")]
+[CreateAssetMenu(menuName = "REPAIR/Partner/Names")]
 [System.Serializable]
 public class PartnerNames : ScriptableObject
 {
