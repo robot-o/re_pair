@@ -9,10 +9,15 @@ public class PartnerStatsEditor : Editor
     {
         PartnerStats myScript = (PartnerStats)target;
 
-        if (GUILayout.Button("Resize/Sync"))
+        if (GUILayout.Button("SYNC"))
         {
             myScript.Resize(myScript.StatCount);
             myScript.Sync();
+        }
+        if (GUILayout.Button("RANDOMIZE"))
+        {
+            myScript.Resize(myScript.StatCount);
+            myScript.Randomize();
         }
 
         DrawDefaultInspector();
