@@ -47,35 +47,22 @@ jobs:
 
   deployWebGLBuild:
     needs: buildForSomePlatforms
-    name: deploy WebGL build to github repo pointing to ggj20.games.roboto.gg
+    name: deploy WebGL build to ggj20.games.roboto.gg
     runs-on: ubuntu-latest
     steps:
-      - name: checkout deployment repo
-        uses: actions/checkout@v2
-        with:
-          repository: robot-o/playrepair
-          path: deploy
-
       - name: download latest webgl build
         uses: actions/download-artifact@v1
         with:
           name: rePAIR-WebGL
           path: artifact
 
-      - name: copy artifacts
-        run: |
-          /bin/cp -rf artifact/WebGL/* deploy
-
-      - name: commit files
-        run: |
-          cd deploy
-          git config --local user.email "action@github.com"
-          git config --local user.name "${GITHUB_ACTOR}"
-          git commit -a -m "deploy(${GITHUB_SHA}): new commit on master"
-
-      - name: push changes
-        uses: ad-m/github-push-action@master
+      - name: deploy artifacts to pages repo
+        uses: crazy-max/ghaction-github-pages@v1.2.5
         with:
-          directory: deploy
-          repository: robot-o/playrepair
-          github_token: ${{ secrets.GH_DEPLOY_LIVE_TOKEN }}
+          repo: robot-o/playrepair
+          target_branch: master
+          build_dir: artifact/WebGL
+          keep_history: true
+          commit_message: "deploy(${GITHUB_SHA}): new commit on master"
+        env:
+          GITHUB_PAT: ${{ secrets.GH_DEPLOY_LIVE_TOKEN }}
