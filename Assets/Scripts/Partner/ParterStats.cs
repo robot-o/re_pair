@@ -5,9 +5,12 @@ using System.Collections.Generic;
 [System.Serializable]
 public class PartnerStats : ScriptableObject
 {
+    [Header("Settings Template")]
+    public PartnerStatsSettings DefaultSettings;
+
     [Header("Amount of stats.")]
     [SerializeField]
-    private int statCount = 5;
+    private int statCount;
     public int StatCount
     {
         get { return statCount; }
@@ -21,25 +24,25 @@ public class PartnerStats : ScriptableObject
     [SerializeField]
     [Header("Resolution defines the step size between increments and decrements.")]
     [Range(0f, 1f)]
-    public float resolution = 0.2f;
+    public float resolution;
 
     [Header("Random Params: All")]
-    public bool randomizeAll = false;
-    public float randDeltaAll = 0f;
+    public bool randomizeAll;
+    public float randDeltaAll;
     [Range(0f, 1f)]
-    public float randResolutionAll = 0.2f;
+    public float randResolutionAll;
     [Header("Random Params: HAVE")]
-    public bool randomizeHave = false;
-    public float randDeltaHave = 0f;
+    public bool randomizeHave;
+    public float randDeltaHave;
 
     [Range(0f, 1f)]
-    public float randResolutionHave = 0.2f;
+    public float randResolutionHave;
     [Header("Random Params: WANT")]
-    public bool randomizeWant = false;
-    public float randDeltaWantMin = 0f;
-    public float randDeltaWantMax = 0f;
+    public bool randomizeWant;
+    public float randDeltaWantMin;
+    public float randDeltaWantMax;
     [Range(0f, 1f)]
-    public float randResolutionWant = 0.2f;
+    public float randResolutionWant;
 
     public List<string> statNames;
 
@@ -54,7 +57,7 @@ public class PartnerStats : ScriptableObject
 
     public PartnerStats()
     {
-        Initialize(statCount > 0 ? statCount : 5);
+        Initialize();
     }
 
     public void Resize(int _count)
@@ -108,14 +111,39 @@ public class PartnerStats : ScriptableObject
         }
     }
 
-    public void Initialize(int _count)
+    public void Initialize()
     {
-        this.statCount = _count;
-        this.statNames = new List<string>(statCount);
-        this.have = new List<PartnerStatEntry>(statNames.Count);
-        this.want = new List<RangedPartnerStatEntry>(statNames.Count);
-        this.conflict = new List<PartnerStatEntry>(statNames.Count);
+        ApplyDefaultSettings();
         Sync();
+    }
+
+    public void ApplySettings(PartnerStatsSettings settings)
+    {
+        if (settings != null)
+        {
+            this.statCount =            settings.statCount;
+            this.resolution =           settings.resolution;
+            this.randomizeAll =         settings.randomizeAll;
+            this.randDeltaAll =         settings.randDeltaAll;
+            this.randResolutionAll =    settings.randResolutionAll;
+            this.randomizeHave =        settings.randomizeHave;
+            this.randDeltaHave =        settings.randDeltaHave;
+            this.randResolutionHave =   settings.randResolutionHave;
+            this.randomizeWant =        settings.randomizeWant;
+            this.randDeltaWantMin =     settings.randDeltaWantMin;
+            this.randDeltaWantMax =     settings.randDeltaWantMax;
+            this.randResolutionWant =   settings.randResolutionWant;
+            this.statNames =            settings.statNames;
+        }
+        else 
+        {
+            Debug.LogError($"Can't apply PartnerStats Settings to {name}, settings is null");
+        }
+    }
+
+    public void ApplyDefaultSettings()
+    {
+        ApplySettings(new PartnerStatsSettings());
     }
 }
 
