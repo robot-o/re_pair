@@ -69,11 +69,13 @@ jobs:
 
       - name: copy webgl build over to deployment path
         run: |
-          #cp -r -f Build/WebGL/WebGL/* -t deploy
+          ls -alh 
+          apt-get update && apt-get install -y unzip
+          unzip artifact.zip -d unzip
+          /bin/cp -rf unzip/WebGL/* deploy
           cd deploy
-          ls -alh
-          git remote -v
           git config --local user.email "action@github.com"
           git config --local user.name "${GITHUB_ACTOR}"
+          git status
           git commit -a -m "deploy(${GITHUB_SHA}): new commit on master"
           git push -u origin master
