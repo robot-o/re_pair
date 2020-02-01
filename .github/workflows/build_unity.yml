@@ -42,18 +42,8 @@ jobs:
 
       - uses: actions/upload-artifact@v1
         with:
-          name: rePAIR-Win
-          path: build/StandaloneWindows64
-
-      - uses: actions/upload-artifact@v1
-        with:
-          name: rePAIR-Linux
-          path: build/StandaloneLinux64
-
-      - uses: actions/upload-artifact@v1
-        with:
-          name: rePAIR-WebGL
-          path: build/WebGL
+          name: rePAIR-${{ matrix.targetPlatform }}
+          path: build/${{ matrix.targetPlatform }}
 
   deployWebGLBuild:
     name: deploy WebGL build to github repo pointing to ggj20.games.roboto.gg
