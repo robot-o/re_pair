@@ -40,15 +40,15 @@ jobs:
           targetPlatform: ${{ matrix.targetPlatform }}
 
       - name: attach build hash to webgl artifact
+        if: matrix.TargetPlatform == 'WebGL'
         run: |
-          if [ ! -d "build/WebGL" ]; then exit 0; fi
-          ls -al build/WebGL/
+          ls -al build/WebGL/WebGL
           commithash=$(git rev-parse --short ${GITHUB_SHA})
-          sed -i -e "s/re_pair/re_pair-$commithash/g" build/WebGL/index.html
+          sed -i -e "s/re_pair/re_pair-$commithash/g" build/WebGL/WebGL/index.html
 
       - uses: actions/upload-artifact@v1
         with:
-          name: rePAIR-${{ matrix.targetPlatform }}
+          name: re_pair-${{ matrix.targetPlatform }}
           path: build/${{ matrix.targetPlatform }}
 
   deployWebGLBuild:
@@ -59,7 +59,7 @@ jobs:
       - name: download latest webgl build
         uses: actions/download-artifact@v1
         with:
-          name: rePAIR-WebGL
+          name: re_pair-WebGL
           path: artifact
 
       - name: deploy artifacts to pages repo

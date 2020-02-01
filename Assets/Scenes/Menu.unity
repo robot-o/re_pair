@@ -221,9 +221,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11467570, guid: 45616935e4fe10f48b62da1347801a16, type: 3}
       propertyPath: m_Text
-      value: 'GGJMUC20:
-
-        rePAIR'
+      value: re_pair
       objectReference: {fileID: 0}
     - target: {fileID: 11488040, guid: 45616935e4fe10f48b62da1347801a16, type: 3}
       propertyPath: changeScenes
