@@ -40,6 +40,11 @@ jobs:
           unityVersion: ${{ matrix.unityVersion }}
           targetPlatform: ${{ matrix.targetPlatform }}
 
+      - name: attach build hash to webgl artifact
+        run: |
+          commithash=$(git rev-parse --short ${GITHUB_SHA})
+          sed -i -e "s/re_pair/re_pair-$commithash/g" build/WebGL/index.html
+
       - uses: actions/upload-artifact@v1
         with:
           name: rePAIR-${{ matrix.targetPlatform }}
@@ -55,11 +60,6 @@ jobs:
         with:
           name: rePAIR-WebGL
           path: artifact
-
-      - name: attach build hash to index.html
-        run: |
-          commithash=$(git rev-parse --short ${GITHUB_SHA})
-          sed -i -e "s/re_pair/re_pair-$commithash/g" artifact/WebGL/index.html
 
       - name: deploy artifacts to pages repo
         uses: crazy-max/ghaction-github-pages@v1.2.5
