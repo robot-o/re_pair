@@ -73,7 +73,7 @@ jobs:
           cd deploy
           ls -alh
           git remote -v
-          #git config --local user.email "action@github.com"
-          #git config --local user.name "${GITHUB_ACTOR}"
-          #git commit -a -m "deploy(${GITHUB_SHA}): new commit on master"
-          #git push -u origin master
+          git config --local user.email "action@github.com"
+          git config --local user.name "${GITHUB_ACTOR}"
+          git commit -a -m "deploy(${GITHUB_SHA}): new commit on master"
+          git push -u origin master
