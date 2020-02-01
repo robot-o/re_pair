@@ -78,4 +78,4 @@ jobs:
         with:
           directory: deploy
           repository: robot-o/playrepair
-          github_token: ${{ secrets.DEPLOY_TOKEN }}
+          github_token: ${{ secrets.GH_DEPLOY_LIVE_TOKEN }}
