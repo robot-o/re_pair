@@ -55,7 +55,7 @@ public class PartnerStats : ScriptableObject
     [Header("conflict potential, the difference between own HAVE and partner's WANT")]
     public List<PartnerStatEntry> conflict;
 
-    public PartnerStats()
+    private void OnEnable()
     {
         Initialize();
     }
@@ -121,21 +121,21 @@ public class PartnerStats : ScriptableObject
     {
         if (settings != null)
         {
-            this.statCount =            settings.statCount;
-            this.resolution =           settings.resolution;
-            this.randomizeAll =         settings.randomizeAll;
-            this.randDeltaAll =         settings.randDeltaAll;
-            this.randResolutionAll =    settings.randResolutionAll;
-            this.randomizeHave =        settings.randomizeHave;
-            this.randDeltaHave =        settings.randDeltaHave;
-            this.randResolutionHave =   settings.randResolutionHave;
-            this.randomizeWant =        settings.randomizeWant;
-            this.randDeltaWantMin =     settings.randDeltaWantMin;
-            this.randDeltaWantMax =     settings.randDeltaWantMax;
-            this.randResolutionWant =   settings.randResolutionWant;
-            this.statNames =            settings.statNames;
+            this.statCount = settings.statCount;
+            this.resolution = settings.resolution;
+            this.randomizeAll = settings.randomizeAll;
+            this.randDeltaAll = settings.randDeltaAll;
+            this.randResolutionAll = settings.randResolutionAll;
+            this.randomizeHave = settings.randomizeHave;
+            this.randDeltaHave = settings.randDeltaHave;
+            this.randResolutionHave = settings.randResolutionHave;
+            this.randomizeWant = settings.randomizeWant;
+            this.randDeltaWantMin = settings.randDeltaWantMin;
+            this.randDeltaWantMax = settings.randDeltaWantMax;
+            this.randResolutionWant = settings.randResolutionWant;
+            this.statNames = settings.statNames;
         }
-        else 
+        else
         {
             Debug.LogError($"Can't apply PartnerStats Settings to {name}, settings is null");
         }
@@ -143,7 +143,7 @@ public class PartnerStats : ScriptableObject
 
     public void ApplyDefaultSettings()
     {
-        ApplySettings(new PartnerStatsSettings());
+        ApplySettings(CreateInstance<PartnerStatsSettings>());
     }
 }
 
