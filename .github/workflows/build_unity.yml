@@ -46,6 +46,7 @@ jobs:
           path: build/${{ matrix.targetPlatform }}
 
   deployWebGLBuild:
+    needs: buildForSomePlatforms
     name: deploy WebGL build to github repo pointing to ggj20.games.roboto.gg
     runs-on: ubuntu-latest
     steps:
