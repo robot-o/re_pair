@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 
 [CustomEditor(typeof(Relationship))]
-public class Relationship : Editor
+public class RelationshipEditor : Editor
 {
     public override void OnInspectorGUI()
     {
