@@ -50,11 +50,6 @@ jobs:
     name: deploy WebGL build to github repo pointing to ggj20.games.roboto.gg
     runs-on: ubuntu-latest
     steps:
-      - name: setup ssh-agent
-        uses: webfactory/ssh-agent@v0.2.0
-        with:
-          ssh-private-key: ${{ secrets.DEPLOY_SSH_PRIVATEKEY }}
-
       - name: checkout deployment repo
         uses: actions/checkout@v2
         with:
@@ -67,13 +62,20 @@ jobs:
           name: rePAIR-WebGL
           path: artifact
 
-      - name: copy webgl build over to deployment path
+      - name: copy artifacts
         run: |
-          ls -alh artifact/
           /bin/cp -rf artifact/WebGL/* deploy
+
+      - name: commit files
+        run: |
           cd deploy
           git config --local user.email "action@github.com"
           git config --local user.name "${GITHUB_ACTOR}"
-          git status
           git commit -a -m "deploy(${GITHUB_SHA}): new commit on master"
-          git push -u origin master
+
+      - name: push changes
+        uses: ad-m/github-push-action@master
+        with:
+          directory: deploy
+          repository: robot-o/playrepair
+          github_token: ${{ secrets.DEPLOY_TOKEN }}
