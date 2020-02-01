@@ -69,10 +69,8 @@ jobs:
 
       - name: copy webgl build over to deployment path
         run: |
-          ls -alh 
-          apt-get update && apt-get install -y unzip
-          unzip artifact.zip -d unzip
-          /bin/cp -rf unzip/WebGL/* deploy
+          ls -alh artifact/
+          /bin/cp -rf artifact/* deploy
           cd deploy
           git config --local user.email "action@github.com"
           git config --local user.name "${GITHUB_ACTOR}"
