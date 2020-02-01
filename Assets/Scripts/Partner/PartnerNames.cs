@@ -1,0 +1,60 @@
+using UnityEngine;
+
+[CreateAssetMenu(menuName = "PartnerNames")]
+[System.Serializable]
+public class PartnerNames : ScriptableObject
+{
+    public string[] names =
+    {
+        "Charlie",
+        "Finley",
+        "Skyler",
+        "Justice",
+        "Royal",
+        "Lennon",
+        "Oakley",
+        "Armani",
+        "Azariah",
+        "Landry",
+        "Frankie",
+        "Sidney",
+        "Denver",
+        "Robin",
+        "Campbell",
+        "Dominique",
+        "Salem",
+        "Yael",
+        "Murphy",
+        "Jael",
+        "Ramsey",
+        "Hollis",
+        "Brighton",
+        "Perry",
+        "Gentry",
+        "Jaidyn",
+        "Reilly",
+        "Jules",
+        "Kylar",
+        "Austen",
+        "Ocean",
+        "Jackie",
+        "Storm",
+        "Honor",
+        "Ryley",
+        "Marlo",
+        "Nikita",
+        "Ridley",
+        "Indiana",
+        "Taylen",
+        "Clarke",
+        "Kylin",
+        "Eastyn",
+        "Payson",
+        "Amen",
+        "Timber",
+        "Cypress",
+        "Lake",
+        "Jaziah",
+        "Dakotah"
+    };
+}
