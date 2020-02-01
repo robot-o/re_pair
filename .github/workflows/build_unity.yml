@@ -1,4 +1,4 @@
-name: build unity3d project
+name: build  and deploy unity3d project
 
 on:
   push:
@@ -25,6 +25,7 @@ jobs:
           - WebGL
     steps:
       - uses: actions/checkout@v1
+
       - uses: actions/cache@v1.1.0
         with:
           path: ${{ matrix.projectPath }}/Library
@@ -32,12 +33,56 @@ jobs:
           restore-keys: |
             Library-${{ matrix.projectPath }}-
             Library-
+
       - uses: webbertakken/unity-builder@v0.9
         with:
           projectPath: ${{ matrix.projectPath }}
           unityVersion: ${{ matrix.unityVersion }}
           targetPlatform: ${{ matrix.targetPlatform }}
+
       - uses: actions/upload-artifact@v1
         with:
-          name: Build
-          path: build
+          name: rePAIR-Win
+          path: build/StandaloneWindows64
+
+      - uses: actions/upload-artifact@v1
+        with:
+          name: rePAIR-Linux
+          path: build/StandaloneLinux64
+
+      - uses: actions/upload-artifact@v1
+        with:
+          name: rePAIR-WebGL
+          path: build/WebGL
+
+  deployWebGLBuild:
+    name: deploy WebGL build to github repo pointing to ggj20.games.roboto.gg
+    runs-on: ubuntu-latest
+    steps:
+      - name: setup ssh-agent
+        uses: webfactory/ssh-agent@v0.2.0
+        with:
+          ssh-private-key: ${{ secrets.DEPLOY_SSH_PRIVATEKEY }}
+
+      - name: checkout deployment repo
+        uses: actions/checkout@v2
+        with:
+          repository: robot-o/playrepair
+          path: deploy
+
+      - name: download latest webgl build
+        uses: actions/download-artifact@v1
+        with:
+          name: rePAIR-WebGL
+          path: artifact
+
+      - name: copy webgl build over to deployment path
+        run: |
+          #cp -r -f Build/WebGL/WebGL/* -t deploy
+          cd deploy
+          ls -alh
+          git remote -v
+          #git config --local user.email "action@github.com"
+          #git config --local user.name "${GITHUB_ACTOR}"
+          #git commit -a -m "deploy(${GITHUB_SHA}): new commit on master"
+          #git push -u origin master
