@@ -6,13 +6,6 @@ public class Partner : MonoBehaviour
     public string firstname;
     public string lastname;
 
-    [Header("conflict potential (c),delta between HAVE other WANT.")]
-    public float c1;
-    public float c2;
-    public float c3;
-    public float c4;
-    public float c5;
-
     [Header("Psych Stats")]
     public PartnerStats stats;
 

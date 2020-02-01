@@ -21,8 +21,10 @@ namespace Util
         }
 
         /// <summary>min value of the range.</summary>
+        [UnityEngine.Range(0f,1f)]
         public T min;
         /// <summary>max value of the range.</summary>
+        [UnityEngine.Range(0f,1f)]
         public T max;
 
         /// <summary>Presents the Range in readable format.</summary>

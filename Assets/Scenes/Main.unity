@@ -235,12 +235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstname: Tomato
   lastname: Potato
-  c1: 0
-  c2: 0
-  c3: 0
-  c4: 0
-  c5: 0
-  stats: {fileID: 0}
+  stats: {fileID: 11400000, guid: 3cd0ce453199eda2094bfabb17ea2cfb, type: 2}
 --- !u!4 &1262454612
 Transform:
   m_ObjectHideFlags: 0

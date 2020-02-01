@@ -9,6 +9,12 @@ namespace Util
             this.max = 1f;
         }
 
+        public FloatRange(float _min, float _max)
+        {
+            this.min = _min;
+            this.max = _max;
+        }
+
     }
 
 }
