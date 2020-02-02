@@ -1,9 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-[CreateAssetMenu(menuName = "REPAIR/Partner/Stats")]
 [System.Serializable]
-public class PartnerStats : ScriptableObject
+public class PartnerStats : MonoBehaviour
 {
     [Header("Settings Template")]
     public PartnerStatsSettings DefaultSettings;
@@ -17,7 +16,7 @@ public class PartnerStats : ScriptableObject
         set
         {
             statCount = value;
-            Resize(statCount);
+            SyncStatSize(statCount);
         }
     }
 
@@ -51,12 +50,16 @@ public class PartnerStats : ScriptableObject
     public List<PartnerStatEntry> conflict;
     public float conflictPercentage = 0f;
 
-    public void Resize(int _count)
+    public void SyncStatSize()
     {
-        statNames.ResizeList(statCount);
-        have.ResizeList(statCount);
-        want.ResizeList(statCount);
-        conflict.ResizeList(statCount);
+        SyncStatSize(statCount);
+    }
+    public void SyncStatSize(int size)
+    {
+        statNames.ResizeList(size);
+        have.ResizeList(size);
+        want.ResizeList(size);
+        conflict.ResizeList(size);
         SyncStatNames();
     }
 
@@ -105,31 +108,40 @@ public class PartnerStats : ScriptableObject
     public void Initialize(PartnerStatsSettings settings)
     {
         ApplySettings(settings);
-        SyncStatNames();
         ApplyRandomize();
     }
 
     public void Initialize()
     {
-        Initialize(DefaultSettings != null ? DefaultSettings : CreateInstance<PartnerStatsSettings>());
+        Initialize(DefaultSettings != null ? DefaultSettings : ScriptableObject.CreateInstance<PartnerStatsSettings>());
     }
 
     public void ApplySettings(PartnerStatsSettings settings)
     {
         if (settings != null)
         {
-            this.statCount = settings.statCount;
-            this.randomizeAll = settings.randomizeAll;
-            this.randDeltaAll = settings.randDeltaAll;
-            this.randResolutionAll = settings.randResolutionAll;
-            this.randomizeHave = settings.randomizeHave;
-            this.randDeltaHave = settings.randDeltaHave;
-            this.randResolutionHave = settings.randResolutionHave;
-            this.randomizeWant = settings.randomizeWant;
-            this.randDeltaWantMin = settings.randDeltaWantMin;
-            this.randDeltaWantMax = settings.randDeltaWantMax;
-            this.randResolutionWant = settings.randResolutionWant;
-            this.statNames = settings.statNames;
+            statCount = settings.statCount;
+            randomizeAll = settings.randomizeAll;
+            randDeltaAll = settings.randDeltaAll;
+            randResolutionAll = settings.randResolutionAll;
+            randomizeHave = settings.randomizeHave;
+            randDeltaHave = settings.randDeltaHave;
+            randResolutionHave = settings.randResolutionHave;
+            randomizeWant = settings.randomizeWant;
+            randDeltaWantMin = settings.randDeltaWantMin;
+            randDeltaWantMax = settings.randDeltaWantMax;
+            randResolutionWant = settings.randResolutionWant;
+            statNames = settings.statNames;
+
+            if (have == null)
+                have = new List<PartnerStatEntry>();
+            if (want == null)
+                want = new List<RangedPartnerStatEntry>();
+            if (conflict == null)
+                conflict = new List<PartnerStatEntry>();
+
+
+            SyncStatSize(statCount);
         }
         else
         {

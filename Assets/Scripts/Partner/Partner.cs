@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(menuName = "REPAIR/Partner/Partner")]
 [System.Serializable]
-public class Partner : ScriptableObject
+public class Partner : MonoBehaviour
 {
     public string displayName;
 
@@ -18,7 +17,7 @@ public class Partner : ScriptableObject
         RandomizeDisplayName();
 
         if (stats == null)
-            stats = ScriptableObject.CreateInstance<PartnerStats>();
+            stats = gameObject.AddComponent<PartnerStats>();
         
         if (DefaultSettings != null)
             stats.DefaultSettings = DefaultSettings;
@@ -30,10 +29,10 @@ public class Partner : ScriptableObject
     {
         if (availableNames == null)
         {
-            availableNames = CreateInstance<PartnerNames>();
+            availableNames = ScriptableObject.CreateInstance<PartnerNames>();
         }
 
         displayName = availableNames.names[Random.Range(0, availableNames.names.Length)];
-        name = $"Partner \"{displayName}\"";
+        name = $"{displayName}";
     }
 }

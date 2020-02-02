@@ -12,6 +12,11 @@ public static class ListExtras
 
         if (size < count)
         {
+            for (int i = count; i > size; i--)
+            {
+                if (list[i] != null)
+                    list.RemoveAt(i);
+            }
             list.RemoveRange(size, count - size);
         }
         else if (size > count)

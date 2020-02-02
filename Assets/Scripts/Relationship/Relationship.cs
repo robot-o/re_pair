@@ -1,9 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-[CreateAssetMenu(menuName = "REPAIR/Relationship/Relationship", order = 2)]
 [System.Serializable]
-public class Relationship : ScriptableObject
+public class Relationship : MonoBehaviour
 {
     public RelationshipSettings DefaultSettings;
     public bool generatePartnerA = false;
@@ -31,15 +30,15 @@ public class Relationship : ScriptableObject
 
     public void Initialize()
     {
-        InitializePartners();
         InitializeSelf();
+        InitializePartners();
         calculateDestiny();
     }
 
     public void InitializeSelf()
     {
         if (DefaultSettings == null)
-            DefaultSettings = CreateInstance<RelationshipSettings>();
+            DefaultSettings = ScriptableObject.CreateInstance<RelationshipSettings>();
 
         this.generatePartnerA = DefaultSettings.generatePartnerA;
         this.generatePartnerB = DefaultSettings.generatePartnerB;
@@ -52,20 +51,24 @@ public class Relationship : ScriptableObject
     {
         if (partnerA == null || generatePartnerA)
         {
-            partnerA = CreateInstance<Partner>();
+            GameObject next = new GameObject("partnerA");
+            next.transform.SetParent(transform);
+            partnerA = next.AddComponent<Partner>();
         }
 
         if (partnerB == null || generatePartnerB)
         {
-            partnerB = CreateInstance<Partner>();
+            GameObject next = new GameObject("partnerB");
+            next.transform.SetParent(transform);
+            partnerB = next.AddComponent<Partner>();
         }
 
         if (partnerStatSettingsA == null)
-            partnerA.DefaultSettings = partnerStatSettingsA;
+            partnerA.DefaultSettings = ScriptableObject.CreateInstance<PartnerStatsSettings>();
 
         if (partnerStatSettingsB == null)
-            partnerB.DefaultSettings = partnerStatSettingsB;
-        
+            partnerB.DefaultSettings = ScriptableObject.CreateInstance<PartnerStatsSettings>();
+
         partnerA.Initialize();
         partnerB.Initialize();
     }

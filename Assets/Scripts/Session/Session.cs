@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[System.Serializable]
 public class Session : MonoBehaviour
 {
     public Relationship relationship;

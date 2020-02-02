@@ -11,12 +11,12 @@ public class PartnerStatsEditor : Editor
 
         if (GUILayout.Button("SYNC"))
         {
-            myScript.Resize(myScript.StatCount);
+            myScript.SyncStatSize(myScript.StatCount);
             myScript.SyncStatNames();
         }
         if (GUILayout.Button("RANDOMIZE"))
         {
-            myScript.Resize(myScript.StatCount);
+            myScript.SyncStatSize(myScript.StatCount);
             myScript.ApplyRandomize();
         }
 
