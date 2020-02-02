@@ -134,12 +134,20 @@ public class PartnerStats : MonoBehaviour
             statNames = settings.statNames;
 
             if (have == null)
-                have = new List<PartnerStatEntry>();
+            {
+                have = new List<PartnerStatEntry>(statCount);
+                have.InitList(new PartnerStatEntry());
+            }
             if (want == null)
-                want = new List<RangedPartnerStatEntry>();
+            {
+                want = new List<RangedPartnerStatEntry>(statCount);
+                want.InitList(new RangedPartnerStatEntry());
+            }
             if (conflict == null)
-                conflict = new List<PartnerStatEntry>();
-
+            {
+                conflict = new List<PartnerStatEntry>(statCount);
+                conflict.InitList(new PartnerStatEntry());
+            }
 
             SyncStatSize(statCount);
         }

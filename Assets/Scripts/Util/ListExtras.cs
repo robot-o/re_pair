@@ -27,4 +27,9 @@ public static class ListExtras
             list.AddRange(System.Linq.Enumerable.Repeat(element, size - count));
         }
     }
+
+    public static void InitList<T>(this List<T> list, T element = default(T))
+    {
+        list.AddRange(System.Linq.Enumerable.Repeat(element, list.Capacity));
+    }
 }
