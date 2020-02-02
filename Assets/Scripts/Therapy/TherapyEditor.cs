@@ -14,6 +14,13 @@ public class TherapyEditor : Editor
             myScript.Initialize();
         }
 
+        if (GUILayout.Button("Next Session"))
+        {
+            if (!myScript.NextSession())
+                Debug.Log("reached last Session");
+        }
+
+
         DrawDefaultInspector();
     }
 }

@@ -1,26 +1,35 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class Session : MonoBehaviour
 {
     public Relationship relationship;
 
-    public PartnerStats deltaA;
-    public PartnerStats deltaB;
+    public List<PartnerStatEntry> deltaHaveA;
+    public List<RangedPartnerStatEntry> deltaWantA;
+    public List<PartnerStatEntry> deltaConflictA;
+    public List<PartnerStatEntry> deltaHaveB;
+    public List<RangedPartnerStatEntry> deltaWantB;
+    public List<PartnerStatEntry> deltaConflictB;
 
-    public Session(ref Relationship _relationship)
+    public void Initialize(ref Relationship _relationship)
     {
         relationship = _relationship;
     }
 
     public void recordDeltaA()
     {
-        deltaA = relationship.partnerA.stats;
+        // deltaHaveA = new List<PartnerStatEntry>(relationship.partnerA.stats.have);
+        // deltaWantA = new List<RangedPartnerStatEntry>(relationship.partnerA.stats.want);
+        // deltaConflictA = new List<PartnerStatEntry>(relationship.partnerA.stats.conflict);
     }
 
     public void recordDeltaB()
     {
-        deltaB = relationship.partnerB.stats;
+        // deltaHaveB = new List<PartnerStatEntry>(relationship.partnerB.stats.have);
+        // deltaWantB = new List<RangedPartnerStatEntry>(relationship.partnerB.stats.want);
+        // deltaConflictB = new List<PartnerStatEntry>(relationship.partnerB.stats.conflict);
     }
 
     public PartnerStatEntry revealHaveA(string targetStat)

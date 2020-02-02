@@ -8,9 +8,11 @@ public class Therapy : MonoBehaviour
     public RelationshipSettings relationshipSettings;
     public Relationship relationship;
     public int budget;
-    
+
     [SerializeField]
     public List<Session> sessions;
+
+    private GameObject sessionParentGO;
 
     public Session GetActiveSession()
     {
@@ -19,18 +21,27 @@ public class Therapy : MonoBehaviour
 
     public bool NextSession()
     {
-        if(sessions == null)
+        if (sessions == null)
             sessions = new List<Session>();
 
-        if(sessions.Count >= budget)
+        if (sessions.Count >= budget)
             return false;
 
-        sessions.Add(new Session(ref relationship));
+        GameObject next = new GameObject($"Session{sessions.Count + 1}/{budget}");
+        next.transform.SetParent(sessionParentGO.transform);
+
+        sessions.Add(next.AddComponent<Session>());
+        GetActiveSession().Initialize(ref relationship);
         return true;
     }
 
     public void Initialize()
     {
+        if (sessionParentGO == null)
+        {
+            sessionParentGO = new GameObject("Sessions");
+            sessionParentGO.transform.SetParent(transform);
+        }
         if (DefaultSettings == null)
             DefaultSettings = ScriptableObject.CreateInstance<TherapySettings>();
 

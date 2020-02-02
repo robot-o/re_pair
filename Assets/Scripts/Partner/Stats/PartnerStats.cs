@@ -137,6 +137,7 @@ public class PartnerStats : MonoBehaviour
             {
                 have = new List<PartnerStatEntry>(statCount);
                 have.InitList(new PartnerStatEntry());
+
             }
             if (want == null)
             {
