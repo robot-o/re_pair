@@ -5,6 +5,8 @@
 public class Partner : ScriptableObject
 {
     public string displayName;
+
+    public PartnerNames availableNames;
     
     [Header("Psych Stats")]
     public PartnerStats stats;
@@ -13,6 +15,8 @@ public class Partner : ScriptableObject
 
     public void Initialize() 
     {
+        RandomizeDisplayName();
+
         if (stats == null)
             stats = ScriptableObject.CreateInstance<PartnerStats>();
         
@@ -20,5 +24,16 @@ public class Partner : ScriptableObject
             stats.DefaultSettings = DefaultSettings;
         
         stats.Initialize();
+    }
+
+    public void RandomizeDisplayName()
+    {
+        if (availableNames == null)
+        {
+            availableNames = CreateInstance<PartnerNames>();
+        }
+
+        displayName = availableNames.names[Random.Range(0, availableNames.names.Length)];
+        name = $"Partner \"{displayName}\"";
     }
 }

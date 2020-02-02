@@ -32,11 +32,20 @@ public class Relationship : ScriptableObject
     public void Initialize()
     {
         InitializePartners();
+        InitializeSelf();
+        calculateDestiny();
     }
 
     public void InitializeSelf()
     {
+        if (DefaultSettings == null)
+            DefaultSettings = CreateInstance<RelationshipSettings>();
 
+        this.generatePartnerA = DefaultSettings.generatePartnerA;
+        this.generatePartnerB = DefaultSettings.generatePartnerB;
+        this.partnerStatSettingsA = DefaultSettings.partnerSettingsA;
+        this.partnerStatSettingsB = DefaultSettings.partnerSettingsB;
+        this.destinyTresholdPercentage = DefaultSettings.destinyTresholdPercentage;
     }
 
     public void InitializePartners()
