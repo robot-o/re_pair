@@ -6,7 +6,6 @@ public class GameSessionManager : MonoBehaviour
     public GameSession gameSession;
     public GameObject uiManagerPrefab;
     public UIManager uiManager;
-
     public List<TherapySettings> therapySettings;
 
     private void Start()

@@ -56,6 +56,7 @@ public class Session : MonoBehaviour
             return relationship.partnerB.stats.have[idx];
         }
     }
+
     public RangedPartnerStatEntry revealWantB(string targetStat)
     {
         int idx = relationship.partnerB.stats.want.FindIndex(o => o.statname == targetStat);
@@ -71,4 +72,26 @@ public class Session : MonoBehaviour
             return relationship.partnerB.stats.want[idx];
         }
     }
+
+    public PartnerStatEntry revealHaveA(int idx)
+    {
+        relationship.partnerA.stats.have[idx].isRevealed = true;
+        return relationship.partnerA.stats.have[idx];
+    }
+    public RangedPartnerStatEntry revealWantA(int idx)
+    {
+        relationship.partnerA.stats.want[idx].isRevealed = true;
+        return relationship.partnerA.stats.want[idx];
+    }
+    public PartnerStatEntry revealHaveB(int idx)
+    {
+        relationship.partnerB.stats.have[idx].isRevealed = true;
+        return relationship.partnerB.stats.have[idx];
+    }
+    public RangedPartnerStatEntry revealWantB(int idx)
+    {
+        relationship.partnerB.stats.want[idx].isRevealed = true;
+        return relationship.partnerB.stats.want[idx];
+    }
+
 }
