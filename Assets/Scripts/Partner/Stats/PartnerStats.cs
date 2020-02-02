@@ -67,6 +67,13 @@ public class PartnerStats : MonoBehaviour
     {
         for (int i = 0; i < statNames.Count; i++)
         {
+            if (have[i] == null)
+                have[i] = new PartnerStatEntry();
+            if (want[i] == null)
+                want[i] = new RangedPartnerStatEntry();
+            if (conflict[i] == null)
+                conflict[i] = new PartnerStatEntry();
+
             string sn = statNames[i];
             have[i].statname = sn;
             want[i].statname = sn;
@@ -134,21 +141,11 @@ public class PartnerStats : MonoBehaviour
             statNames = settings.statNames;
 
             if (have == null)
-            {
                 have = new List<PartnerStatEntry>(statCount);
-                have.InitList(new PartnerStatEntry());
-
-            }
             if (want == null)
-            {
                 want = new List<RangedPartnerStatEntry>(statCount);
-                want.InitList(new RangedPartnerStatEntry());
-            }
             if (conflict == null)
-            {
                 conflict = new List<PartnerStatEntry>(statCount);
-                conflict.InitList(new PartnerStatEntry());
-            }
 
             SyncStatSize(statCount);
         }
