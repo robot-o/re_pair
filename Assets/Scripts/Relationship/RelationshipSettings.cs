@@ -9,9 +9,6 @@ public class RelationshipSettings : ScriptableObject
 
     public PartnerStatsSettings partnerSettingsA;
     public PartnerStatsSettings partnerSettingsB;
-
-    public Partner partnerA;
-    public Partner partnerB;
-
+    
     public float destinyTresholdPercentage = 0.8f;
 }

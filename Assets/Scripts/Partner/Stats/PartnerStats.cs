@@ -120,7 +120,7 @@ public class PartnerStats : MonoBehaviour
 
     public void Initialize()
     {
-        Initialize(DefaultSettings != null ? DefaultSettings : ScriptableObject.CreateInstance<PartnerStatsSettings>());
+        Initialize(null);
     }
 
     public void ApplySettings(PartnerStatsSettings settings)

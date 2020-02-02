@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4170a855f0cc8cca8a116f869b1cbeaf, type: 3}
+  m_Name: RelationshipSettings
+  m_EditorClassIdentifier: 
+  generatePartnerA: 0
+  generatePartnerB: 0
+  partnerSettingsA: {fileID: 11400000, guid: d8d32bb17c59bb6aa95337e825c2b921, type: 2}
+  partnerSettingsB: {fileID: 11400000, guid: d8d32bb17c59bb6aa95337e825c2b921, type: 2}
+  destinyTresholdPercentage: 0.8

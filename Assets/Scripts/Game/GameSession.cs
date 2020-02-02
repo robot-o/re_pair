@@ -9,10 +9,24 @@ public class GameSession : MonoBehaviour
 
     public void Initialize()
     {
-        therapySettings = new List<TherapySettings>(maxTherapies);
-        while(therapySettings.Count < maxTherapies)
+        Initialize(null);
+    }
+
+    public void Initialize(List<TherapySettings> ts)
+    {
+        if (ts == null)
         {
-            therapySettings.Add(ScriptableObject.CreateInstance<TherapySettings>());
+            therapySettings = new List<TherapySettings>(maxTherapies);
+            while(therapySettings.Count < maxTherapies)
+            {
+                therapySettings.Add(ScriptableObject.CreateInstance<TherapySettings>());
+            }
+        }
+        else
+        {
+            Debug.Log("recieved therapy settings during initialize");
+            therapySettings = ts;
+            maxTherapies = therapySettings.Count;
         }
     }
 
@@ -36,8 +50,7 @@ public class GameSession : MonoBehaviour
         next.transform.SetParent(transform);
 
         therapies.Add(next.AddComponent<Therapy>());
-        GetActiveTherapy().Initialize();
-
+        GetActiveTherapy().Initialize(therapySettings[therapies.Count > 0 ? therapies.Count - 1 : 0]);
         return true;
     }
 

@@ -37,16 +37,27 @@ public class Therapy : MonoBehaviour
 
     public void Initialize()
     {
+        Initialize(null);
+    }
+
+    public void Initialize(TherapySettings ts)
+    {
         if (sessionParentGO == null)
         {
             sessionParentGO = new GameObject("Sessions");
             sessionParentGO.transform.SetParent(transform);
         }
-        if (DefaultSettings == null)
+        if (ts == null)
+        {
             DefaultSettings = ScriptableObject.CreateInstance<TherapySettings>();
+        }
+        else
+        {
+            DefaultSettings = ts;
+        }
 
-        this.relationshipSettings = DefaultSettings.relationshipSettings;
-        this.budget = DefaultSettings.budget;
+        relationshipSettings = DefaultSettings.relationshipSettings;
+        budget = DefaultSettings.budget;
 
         if (relationship == null)
         {

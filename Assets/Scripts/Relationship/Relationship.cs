@@ -40,11 +40,12 @@ public class Relationship : MonoBehaviour
         if (DefaultSettings == null)
             DefaultSettings = ScriptableObject.CreateInstance<RelationshipSettings>();
 
-        this.generatePartnerA = DefaultSettings.generatePartnerA;
-        this.generatePartnerB = DefaultSettings.generatePartnerB;
-        this.partnerStatSettingsA = DefaultSettings.partnerSettingsA;
-        this.partnerStatSettingsB = DefaultSettings.partnerSettingsB;
-        this.destinyTresholdPercentage = DefaultSettings.destinyTresholdPercentage;
+        generatePartnerA = DefaultSettings.generatePartnerA;
+        generatePartnerB = DefaultSettings.generatePartnerB;
+        partnerStatSettingsA = DefaultSettings.partnerSettingsA;
+        partnerStatSettingsB = DefaultSettings.partnerSettingsB;
+        destinyTresholdPercentage = DefaultSettings.destinyTresholdPercentage;
+
     }
 
     public void InitializePartners()
@@ -69,8 +70,8 @@ public class Relationship : MonoBehaviour
         if (partnerStatSettingsB == null)
             partnerB.DefaultSettings = ScriptableObject.CreateInstance<PartnerStatsSettings>();
 
-        partnerA.Initialize();
-        partnerB.Initialize();
+        partnerA.Initialize(partnerStatSettingsA);
+        partnerB.Initialize(partnerStatSettingsB);
     }
 
     public void calculateConflict()

@@ -33,4 +33,6 @@ public class PartnerStatsSettings : ScriptableObject
         "agreeableness",
         "neuroticism"
     };
+
+    public PartnerNames availablePartnerNames;
 }
