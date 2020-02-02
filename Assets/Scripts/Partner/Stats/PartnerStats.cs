@@ -57,10 +57,10 @@ public class PartnerStats : ScriptableObject
         have.ResizeList(statCount);
         want.ResizeList(statCount);
         conflict.ResizeList(statCount);
-        Sync();
+        SyncStatNames();
     }
 
-    public void Sync()
+    public void SyncStatNames()
     {
         for (int i = 0; i < statNames.Count; i++)
         {
@@ -76,7 +76,7 @@ public class PartnerStats : ScriptableObject
         return ((Mathf.Round(input / step)) * step);
     }
 
-    public void Randomize(bool overrideAll = false, bool overrideHave = false, bool overrideWant = false)
+    public void ApplyRandomize(bool overrideAll = false, bool overrideHave = false, bool overrideWant = false)
     {
 
         for (int i = 0; i < statNames.Count; i++)
@@ -105,7 +105,8 @@ public class PartnerStats : ScriptableObject
     public void Initialize(PartnerStatsSettings settings)
     {
         ApplySettings(settings);
-        Sync();
+        SyncStatNames();
+        ApplyRandomize();
     }
 
     public void Initialize()

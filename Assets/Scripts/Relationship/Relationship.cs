@@ -5,6 +5,7 @@ using System.Collections.Generic;
 [System.Serializable]
 public class Relationship : ScriptableObject
 {
+    public RelationshipSettings DefaultSettings;
     public bool generatePartnerA = false;
     public bool generatePartnerB = false;
 
@@ -30,12 +31,22 @@ public class Relationship : ScriptableObject
 
     public void Initialize()
     {
-        if (partnerA == null)
+        InitializePartners();
+    }
+
+    public void InitializeSelf()
+    {
+
+    }
+
+    public void InitializePartners()
+    {
+        if (partnerA == null || generatePartnerA)
         {
             partnerA = CreateInstance<Partner>();
         }
 
-        if (partnerB == null)
+        if (partnerB == null || generatePartnerB)
         {
             partnerB = CreateInstance<Partner>();
         }
@@ -49,6 +60,7 @@ public class Relationship : ScriptableObject
         partnerA.Initialize();
         partnerB.Initialize();
     }
+
     public void calculateConflict()
     {
         calculateConflict(ref partnerA, ref partnerB);
