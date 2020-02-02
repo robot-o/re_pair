@@ -9,19 +9,19 @@ public class Sessionditor : Editor
     {
         Session myScript = (Session)target;
 
-        if (GUILayout.Button("deltaA"))
-        {
-            myScript.recordDeltaA();
-        }
-        if (GUILayout.Button("deltaB"))
-        {
-            myScript.recordDeltaB();
-        }
+        // if (GUILayout.Button("deltaA"))
+        // {
+        //     myScript.recordDeltaA();
+        // }
+        // if (GUILayout.Button("deltaB"))
+        // {
+        //     myScript.recordDeltaB();
+        // }
         if (GUILayout.Button("revealHA"))
         {
             foreach (string s in myScript.relationship.partnerA.stats.statNames)
             {
-                Debug.Log($"revealing H:{s} on A: {myScript.revealHaveA(s).val}");
+                Debug.Log($"revealing HAVE: {s} on A: {myScript.revealHaveA(s).val}");
             }
         }
         if (GUILayout.Button("revealWA"))
@@ -29,14 +29,14 @@ public class Sessionditor : Editor
             foreach (string s in myScript.relationship.partnerA.stats.statNames)
             {
                 Util.FloatRange val = myScript.revealWantA(s).val;
-                Debug.Log($"revealing H:{s} on A: {val.min} - {val.max}");
+                Debug.Log($"revealing WANT: {s} on A: {val.min} - {val.max}");
             }
         }
         if (GUILayout.Button("revealHB"))
         {
             foreach (string s in myScript.relationship.partnerB.stats.statNames)
             {
-                Debug.Log($"revealing H:{s} on B {myScript.revealHaveB(s).val}");
+                Debug.Log($"revealing HAVE: {s} on B {myScript.revealHaveB(s).val}");
             }
         }
         if (GUILayout.Button("revealWB"))
@@ -44,7 +44,7 @@ public class Sessionditor : Editor
             foreach (string s in myScript.relationship.partnerB.stats.statNames)
             {
                 Util.FloatRange val = myScript.revealWantB(s).val;
-                Debug.Log($"revealing W:{s} on B: {val.min} - {val.max}");
+                Debug.Log($"revealing WANT: {s} on B: {val.min} - {val.max}");
             }
         }
         

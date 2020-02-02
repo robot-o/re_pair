@@ -1,35 +1,14 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 [System.Serializable]
 public class Session : MonoBehaviour
 {
     public Relationship relationship;
 
-    public List<PartnerStatEntry> deltaHaveA;
-    public List<RangedPartnerStatEntry> deltaWantA;
-    public List<PartnerStatEntry> deltaConflictA;
-    public List<PartnerStatEntry> deltaHaveB;
-    public List<RangedPartnerStatEntry> deltaWantB;
-    public List<PartnerStatEntry> deltaConflictB;
 
     public void Initialize(ref Relationship _relationship)
     {
         relationship = _relationship;
-    }
-
-    public void recordDeltaA()
-    {
-        // deltaHaveA = new List<PartnerStatEntry>(relationship.partnerA.stats.have);
-        // deltaWantA = new List<RangedPartnerStatEntry>(relationship.partnerA.stats.want);
-        // deltaConflictA = new List<PartnerStatEntry>(relationship.partnerA.stats.conflict);
-    }
-
-    public void recordDeltaB()
-    {
-        // deltaHaveB = new List<PartnerStatEntry>(relationship.partnerB.stats.have);
-        // deltaWantB = new List<RangedPartnerStatEntry>(relationship.partnerB.stats.want);
-        // deltaConflictB = new List<PartnerStatEntry>(relationship.partnerB.stats.conflict);
     }
 
     public PartnerStatEntry revealHaveA(string targetStat)
@@ -44,7 +23,6 @@ public class Session : MonoBehaviour
         else
         {
             relationship.partnerA.stats.have[idx].isRevealed = true;
-            recordDeltaA();
             return relationship.partnerA.stats.have[idx];
         }
     }
@@ -60,7 +38,6 @@ public class Session : MonoBehaviour
         else
         {
             relationship.partnerA.stats.want[idx].isRevealed = true;
-            recordDeltaA();
             return relationship.partnerA.stats.want[idx];
         }
     }
@@ -76,7 +53,6 @@ public class Session : MonoBehaviour
         else
         {
             relationship.partnerB.stats.have[idx].isRevealed = true;
-            recordDeltaB();
             return relationship.partnerB.stats.have[idx];
         }
     }
@@ -92,7 +68,6 @@ public class Session : MonoBehaviour
         else
         {
             relationship.partnerB.stats.want[idx].isRevealed = true;
-            recordDeltaB();
             return relationship.partnerB.stats.want[idx];
         }
     }
