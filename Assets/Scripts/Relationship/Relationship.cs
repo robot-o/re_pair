@@ -1,15 +1,15 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-[CreateAssetMenu(menuName = "REPAIR/Relationship", order = 2)]
+[CreateAssetMenu(menuName = "REPAIR/Relationship/Relationship", order = 2)]
 [System.Serializable]
 public class Relationship : ScriptableObject
 {
     public bool generatePartnerA = false;
     public bool generatePartnerB = false;
 
-    public PartnerStatsSettings partnerSettingsA;
-    public PartnerStatsSettings partnerSettingsB;
+    public PartnerStatsSettings partnerStatSettingsA;
+    public PartnerStatsSettings partnerStatSettingsB;
 
     public Partner partnerA;
     public Partner partnerB;
@@ -32,8 +32,22 @@ public class Relationship : ScriptableObject
     {
         if (partnerA == null)
         {
-            // partnerA = GameObject.Instantiate(new Gam)
+            partnerA = CreateInstance<Partner>();
         }
+
+        if (partnerB == null)
+        {
+            partnerB = CreateInstance<Partner>();
+        }
+
+        if (partnerStatSettingsA == null)
+            partnerA.DefaultSettings = partnerStatSettingsA;
+
+        if (partnerStatSettingsB == null)
+            partnerB.DefaultSettings = partnerStatSettingsB;
+        
+        partnerA.Initialize();
+        partnerB.Initialize();
     }
     public void calculateConflict()
     {

@@ -21,11 +21,6 @@ public class PartnerStats : ScriptableObject
         }
     }
 
-    [SerializeField]
-    [Header("Resolution defines the step size between increments and decrements.")]
-    [Range(0f, 1f)]
-    public float resolution;
-
     [Header("Random Params: All")]
     public bool randomizeAll;
     public float randDeltaAll;
@@ -55,11 +50,6 @@ public class PartnerStats : ScriptableObject
     [Header("conflict potential, the difference between own HAVE and partner's WANT")]
     public List<PartnerStatEntry> conflict;
     public float conflictPercentage = 0f;
-
-    private void OnEnable()
-    {
-        Initialize();
-    }
 
     public void Resize(int _count)
     {
@@ -112,10 +102,15 @@ public class PartnerStats : ScriptableObject
         }
     }
 
+    public void Initialize(PartnerStatsSettings settings)
+    {
+        ApplySettings(settings);
+        Sync();
+    }
+
     public void Initialize()
     {
-        ApplyDefaultSettings();
-        Sync();
+        Initialize(DefaultSettings != null ? DefaultSettings : CreateInstance<PartnerStatsSettings>());
     }
 
     public void ApplySettings(PartnerStatsSettings settings)
@@ -123,7 +118,6 @@ public class PartnerStats : ScriptableObject
         if (settings != null)
         {
             this.statCount = settings.statCount;
-            this.resolution = settings.resolution;
             this.randomizeAll = settings.randomizeAll;
             this.randDeltaAll = settings.randDeltaAll;
             this.randResolutionAll = settings.randResolutionAll;
@@ -140,11 +134,6 @@ public class PartnerStats : ScriptableObject
         {
             Debug.LogError($"Can't apply PartnerStats Settings to {name}, settings is null");
         }
-    }
-
-    public void ApplyDefaultSettings()
-    {
-        ApplySettings(CreateInstance<PartnerStatsSettings>());
     }
 }
 

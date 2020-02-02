@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b60bffafc2982fa6f8eea83a44c9cc32, type: 3}
+  m_Name: New Partner Stats
+  m_EditorClassIdentifier: 
+  DefaultSettings: {fileID: 0}
+  statCount: 0
+  resolution: 0
+  randomizeAll: 0
+  randDeltaAll: 0
+  randResolutionAll: 0
+  randomizeHave: 0
+  randDeltaHave: 0
+  randResolutionHave: 0
+  randomizeWant: 0
+  randDeltaWantMin: 0
+  randDeltaWantMax: 0
+  randResolutionWant: 0
+  statNames: []
+  have: []
+  want: []
+  conflict: []
+  conflictPercentage: 0

@@ -8,4 +8,10 @@ public class Therapy : ScriptableObject
     public Relationship relationship;
     public int budget;
     public List<Session> sessions;
+
+
+    public void Initialize()
+    {
+        
+    }
 }

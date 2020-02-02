@@ -9,14 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0d2402214e58029b812c596aabd74b4, type: 3}
-  m_Name: TestRelationship
+  m_Script: {fileID: 11500000, guid: 4170a855f0cc8cca8a116f869b1cbeaf, type: 3}
+  m_Name: New Relationship Settings
   m_EditorClassIdentifier: 
-  partnerA: {fileID: 0}
+  generatePartnerA: 0
+  generatePartnerB: 0
   partnerSettingsA: {fileID: 0}
-  partnerB: {fileID: 0}
   partnerSettingsB: {fileID: 0}
-  patience: 0
-  supposedToBe: 0
-  conflictADisplay: []
-  conflictBDisplay: []
+  partnerA: {fileID: 0}
+  partnerB: {fileID: 0}
+  destinyTresholdPercentage: 0.8

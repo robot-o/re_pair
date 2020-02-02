@@ -1,22 +1,24 @@
 ﻿using UnityEngine;
 
-public class Partner : MonoBehaviour
+[CreateAssetMenu(menuName = "REPAIR/Partner/Partner")]
+[System.Serializable]
+public class Partner : ScriptableObject
 {
-    [Header("Base Stats")]
-    public string firstname = "Firstname";
-    public string lastname = "Lastname";
-
+    public string displayName;
+    
     [Header("Psych Stats")]
     public PartnerStats stats;
+    [Header("Settings Template")]
+    public PartnerStatsSettings DefaultSettings;
 
-    [ExecuteInEditMode]
-    private void UpdateDisplayName()
+    public void Initialize() 
     {
-        gameObject.name = $"{firstname} {lastname}";
-    }
-
-    void Start()
-    {
-        UpdateDisplayName();
+        if (stats == null)
+            stats = ScriptableObject.CreateInstance<PartnerStats>();
+        
+        if (DefaultSettings != null)
+            stats.DefaultSettings = DefaultSettings;
+        
+        stats.Initialize();
     }
 }
